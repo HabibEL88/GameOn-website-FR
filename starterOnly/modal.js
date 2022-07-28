@@ -59,7 +59,8 @@ function validateForm() {
   let radioChecked;
   let conditionsChecked;
 
-
+  
+  const confirmation = document.getElementById("confirmation")
 
 
   const first = document.getElementById("first");
@@ -71,7 +72,6 @@ function validateForm() {
   else {    
     errorFirst.style.display = "none";
     firstChecked = true;
-    console.log("je suis là")
   }
 //(1) Le champ Prénom a un minimum de 2 caractères / n'est pas vide.
 
@@ -109,6 +109,7 @@ function validateForm() {
   }
   else{
     errorBirthdate.style.display = "none";
+    birthChecked = true;
   }
   
  const quantity = document.getElementById("quantity");
@@ -144,7 +145,6 @@ if (loc1 || loc2 || loc3 || loc4 || loc5 || loc6) {
 else{
   errorLoc.style.display = "block";
   errorLoc.textContent = "Vous devez choisir une option."
-  console.log(loc1);
   }
 
 
@@ -159,7 +159,16 @@ else{
     conditionsChecked = true
   }
 
+  if (firstChecked === true &&  lastChecked === true && birthChecked === true && quantityChecked === true && radioChecked === true && conditionsChecked === true) {
+    confirmation.style.display = "block"
+  }
+  
+
 }
+
+
+
+
 
 
 

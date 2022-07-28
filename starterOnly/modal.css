@@ -333,6 +333,13 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+
+#confirmation {
+  font-size: 1rem;
+  color: green;
+  text-align: center;
+  display: none;
+}
 /* custom select styles */
 .custom-select {
   position: relative;
