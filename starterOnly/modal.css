@@ -528,6 +528,8 @@ footer {
 }
 
 
-.error {
+.error-alert-message{
+  color: red;
+  font-size: 14px;
   display: none;
 }
