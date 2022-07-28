@@ -55,7 +55,7 @@ function validateForm() {
   const errorFirst = document.getElementById("errorFirstName");
   if (first.value.length < 2) {
     errorFirst.style.display = "block";
-    errorFirst.textContent = "Veuillez remplir le firstName";
+    errorFirst.textContent = "Veuillez remplir le champt Prénom";
   } 
   else {    
     errorFirst.style.display = "none";
@@ -68,7 +68,7 @@ function validateForm() {
   const errorLastName = document.getElementById("errorLastName"); 
   if (last.value.length < 2) {  // si seulement last.value = true si quelque chose dedans !=contraire de / || = ou / longueur 
     errorLastName.style.display = "block";
-    errorLastName.textContent = "Veuillez remplir le lastname";
+    errorLastName.textContent = "Veuillez remplir le champ Nom";
   }
   else {    
     errorLastName.style.display = "none";
@@ -79,7 +79,7 @@ function validateForm() {
   const errorEmail = document.getElementById("errorMail");
   if ( !email.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g) ) { //regex pour verification format email
     errorEmail.style.display = "block";
-    errorEmail.textContent = "Veuillez remplir l'email";
+    errorEmail.textContent = "Veuillez remplir le champ email";
   }
   else {    
     errorEmail.style.display = "none";
@@ -96,16 +96,23 @@ function validateForm() {
  const quantity = document.getElementById("quantity");
  const errorQuantity = document.getElementById("errorQuantity");
  
- let quantityInt = parseInt(quantity.value, 10) //parseInt change string en int (mettre ",10" pour convertir en base 10)
- console.log((typeof)quantityInt)
-if(quantityInt == ""){
+ //let quantityInt = parseInt(quantity.value, 10); //parseInt change string en int (mettre ",10" pour convertir en base 10)
+ 
+
+if (!quantity.value.match(/^[0-9]+$/)) { //regex pour check if number
+  errorQuantity.style.display = "block";
+  errorQuantity.textContent = "Veuiller indiquer un nombre"
+}
+else {
+  errorQuantity.style.display = "none"
+}
 
 
 }
 
-}
+
 
 const validatebutton = document.querySelector(".btn-submit");
 validatebutton.addEventListener("click", validateForm);
 
-() 
+ 
