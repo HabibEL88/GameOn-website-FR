@@ -39,15 +39,23 @@ const closebutton = document.querySelector(".close");
 closebutton.addEventListener("click", closeModale);
 // 3/ J'écris la fonction de fermeture de la modale
 function closeModale() {
+
+
   // Je récupère la modal 
   modalbg.style.display = "none";
+  document.getElementById("formulaire").reset(); // reset du formulaire
+  const deleteMessage = document.getElementById("confirmation") 
+  deleteMessage.style.display = "none"
 }
+
 
 const formulaire = document.getElementById("reserve");
 
 // Afficher des erreurs
 // A/ Ajoute dans ton fichier .html un message d'erreur, que tu hide par défaut, affiche si nécessaire
 // B/ Insérer dans le DOM l'erreur quand elle est là
+
+
 
 
 function validateForm() {
@@ -62,9 +70,35 @@ function validateForm() {
   
   const confirmation = document.getElementById("confirmation")
 
+  //Const error
 
-  const first = document.getElementById("first");
   const errorFirst = document.getElementById("errorFirstName");
+  const errorLastName = document.getElementById("errorLastName");   
+  const errorEmail = document.getElementById("errorMail");
+  const errorBirthdate = document.getElementById ("errorBirthdate");  
+  const errorQuantity = document.getElementById("errorQuantity");
+  const errorLoc = document.getElementById("errorLoc");
+  const errorCheckbox = document.getElementById("errorCheckBox");
+  //Use document.getElementById('id').checked //method for this. 
+  //It will return the checked status of the radio button as a Boolean value. 
+  // It can be either true or false.
+  
+  //Const entries
+  const first = document.getElementById("first");
+  const last = document.getElementById("last")
+  const email = document.getElementById("email");  
+  const birthdate = document.getElementById ("birthdate");
+  const quantity = document.getElementById("quantity");
+  const loc1 = document.getElementById("location1").checked; 
+  const loc2 = document.getElementById("location2").checked;
+  const loc3 = document.getElementById("location3").checked; 
+  const loc4 = document.getElementById("location4").checked; 
+  const loc5 = document.getElementById("location5").checked; 
+  const loc6 = document.getElementById("location6").checked;  
+  const validation = document.getElementById("checkbox1");
+  
+  
+  
   if (first.value.length < 2) {
     errorFirst.style.display = "block";
     errorFirst.textContent = "Veuillez remplir le champt Prénom";
@@ -73,11 +107,8 @@ function validateForm() {
     errorFirst.style.display = "none";
     firstChecked = true;
   }
-//(1) Le champ Prénom a un minimum de 2 caractères / n'est pas vide.
-
-
- const last = document.getElementById("last"); /*on crée une variable qui frecupere l'element HTML "last" */
-  const errorLastName = document.getElementById("errorLastName"); 
+ ; /*on crée une variable qui frecupere l'element HTML "last" */
+  
   if (last.value.length < 2) {  // si seulement last.value = true si quelque chose dedans !=contraire de / || = ou / longueur 
     errorLastName.style.display = "block";
     errorLastName.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
@@ -86,10 +117,7 @@ function validateForm() {
     errorLastName.style.display = "none";
     lastChecked = true;
   }
-
-//(2) Le champ du nom de famille a un minimum de 2 caractères / n'est pas vide.
-  const email = document.getElementById("email");
-  const errorEmail = document.getElementById("errorMail");
+ 
   if ( !email.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g) ) { //regex pour verification format email
     errorEmail.style.display = "block";
     errorEmail.textContent = "Veuillez remplir le champ email";
@@ -98,58 +126,35 @@ function validateForm() {
     errorEmail.style.display = "none";
     mailChecked = true;
   }
-
-//(3) L'adresse électronique est valide.
-  const birthdate = document.getElementById ("birthdate");
-  const errorBirthdate = document.getElementById ("errorBirthdate");
+  
   if (!birthdate.value.match(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/)) {
     errorBirthdate.style.display = "block";
     errorBirthdate.textContent = "Vous devez entrer votre date de naissance.";
-    console.log(typeof(birthdate));
   }
   else{
     errorBirthdate.style.display = "none";
     birthChecked = true;
-  }
-  
- const quantity = document.getElementById("quantity");
- const errorQuantity = document.getElementById("errorQuantity");
- 
+  } 
  //let quantityInt = parseInt(quantity.value, 10); //parseInt change string en int (mettre ",10" pour convertir en base 10)
  
-
-if (!quantity.value.match(/^[0-9]+$/)) { //regex pour check if number
-  errorQuantity.style.display = "block";
-  errorQuantity.textContent = "Veuiller indiquer un nombre"
-}
-else {
-  errorQuantity.style.display = "none"
-  quantityChecked = true;
-};
-
-const loc1 = document.getElementById("location1").checked;  
-//Use document.getElementById('id').checked //method for this. 
-//It will return the checked status of the radio button as a Boolean value. 
-// It can be either true or false.
-const loc2 = document.getElementById("location2").checked;
-const loc3 = document.getElementById("location3").checked; 
-const loc4 = document.getElementById("location4").checked; 
-const loc5 = document.getElementById("location5").checked; 
-const loc6 = document.getElementById("location6").checked;
-const errorLoc = document.getElementById("errorLoc");
-
-if (loc1 || loc2 || loc3 || loc4 || loc5 || loc6) {
-  errorLoc.style.display = "none";
-  radioChecked = true;
-}
-else{
-  errorLoc.style.display = "block";
-  errorLoc.textContent = "Vous devez choisir une option."
+  if (!quantity.value.match(/^[0-9]+$/)) { //regex pour check if number
+    errorQuantity.style.display = "block";
+    errorQuantity.textContent = "Veuiller indiquer un nombre"
   }
+  else {
+    errorQuantity.style.display = "none"
+    quantityChecked = true;
+  };
 
-
-  const validation = document.getElementById("checkbox1")
-  const errorCheckbox = document.getElementById("errorCheckBox")
+  if (loc1 || loc2 || loc3 || loc4 || loc5 || loc6) {
+    errorLoc.style.display = "none";
+    radioChecked = true;
+  }
+  else{
+    errorLoc.style.display = "block";
+    errorLoc.textContent = "Vous devez choisir une option."
+  }
+  
   if (!validation.checked) {
     errorCheckbox.style.display = "block";
     errorCheckbox.textContent = "Vous devez vérifier que vous acceptez les termes et conditions."   
@@ -161,9 +166,7 @@ else{
 
   if (firstChecked === true &&  lastChecked === true && birthChecked === true && quantityChecked === true && radioChecked === true && conditionsChecked === true) {
     confirmation.style.display = "block"
-  }
-  
-
+  }  
 }
 
 
