@@ -51,6 +51,17 @@ const formulaire = document.getElementById("reserve");
 
 
 function validateForm() {
+  let firstChecked;
+  let lastChecked;
+  let mailChecked;
+  let birthChecked;
+  let quantityChecked;
+  let radioChecked;
+  let conditionsChecked;
+
+
+
+
   const first = document.getElementById("first");
   const errorFirst = document.getElementById("errorFirstName");
   if (first.value.length < 2) {
@@ -59,6 +70,7 @@ function validateForm() {
   } 
   else {    
     errorFirst.style.display = "none";
+    firstChecked = true;
     console.log("je suis là")
   }
 //(1) Le champ Prénom a un minimum de 2 caractères / n'est pas vide.
@@ -68,10 +80,11 @@ function validateForm() {
   const errorLastName = document.getElementById("errorLastName"); 
   if (last.value.length < 2) {  // si seulement last.value = true si quelque chose dedans !=contraire de / || = ou / longueur 
     errorLastName.style.display = "block";
-    errorLastName.textContent = "Veuillez remplir le champ Nom";
+    errorLastName.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
   }
   else {    
     errorLastName.style.display = "none";
+    lastChecked = true;
   }
 
 //(2) Le champ du nom de famille a un minimum de 2 caractères / n'est pas vide.
@@ -83,16 +96,21 @@ function validateForm() {
   }
   else {    
     errorEmail.style.display = "none";
+    mailChecked = true;
   }
 
 //(3) L'adresse électronique est valide.
-  /*const birthday = document.getElementById ("birthday");
-  if (!first.value || first.value.length >= 2) {
-    const errorFirst = document.getElementById ("errorFirstName");
-    errorFirst.style.display = "block";
-    errorFirst.textContent = "Veuillez remplir le firstName";
+  const birthdate = document.getElementById ("birthdate");
+  const errorBirthdate = document.getElementById ("errorBirthdate");
+  if (!birthdate.value.match(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/)) {
+    errorBirthdate.style.display = "block";
+    errorBirthdate.textContent = "Vous devez entrer votre date de naissance.";
+    console.log(typeof(birthdate));
   }
-  */
+  else{
+    errorBirthdate.style.display = "none";
+  }
+  
  const quantity = document.getElementById("quantity");
  const errorQuantity = document.getElementById("errorQuantity");
  
@@ -105,8 +123,41 @@ if (!quantity.value.match(/^[0-9]+$/)) { //regex pour check if number
 }
 else {
   errorQuantity.style.display = "none"
-}
+  quantityChecked = true;
+};
 
+const loc1 = document.getElementById("location1").checked;  
+//Use document.getElementById('id').checked //method for this. 
+//It will return the checked status of the radio button as a Boolean value. 
+// It can be either true or false.
+const loc2 = document.getElementById("location2").checked;
+const loc3 = document.getElementById("location3").checked; 
+const loc4 = document.getElementById("location4").checked; 
+const loc5 = document.getElementById("location5").checked; 
+const loc6 = document.getElementById("location6").checked;
+const errorLoc = document.getElementById("errorLoc");
+
+if (loc1 || loc2 || loc3 || loc4 || loc5 || loc6) {
+  errorLoc.style.display = "none";
+  radioChecked = true;
+}
+else{
+  errorLoc.style.display = "block";
+  errorLoc.textContent = "Vous devez choisir une option."
+  console.log(loc1);
+  }
+
+
+  const validation = document.getElementById("checkbox1")
+  const errorCheckbox = document.getElementById("errorCheckBox")
+  if (!validation.checked) {
+    errorCheckbox.style.display = "block";
+    errorCheckbox.textContent = "Vous devez vérifier que vous acceptez les termes et conditions."   
+  }
+  else{
+    errorCheckbox.style.display = "none"
+    conditionsChecked = true
+  }
 
 }
 
