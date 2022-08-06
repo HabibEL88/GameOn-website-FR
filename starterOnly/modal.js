@@ -45,20 +45,18 @@ function closeModale() {
   modalbg.style.display = "none";
   document.getElementById("formulaire").reset(); // reset du formulaire
   const deleteMessage = document.getElementById("confirmation") 
-  deleteMessage.style.display = "none"
+  deleteMessage.style.display = "none" //je fais disparaitre 
 }
 
 
 const formulaire = document.getElementById("reserve");
 
-// Afficher des erreurs
-// A/ Ajoute dans ton fichier .html un message d'erreur, que tu hide par défaut, affiche si nécessaire
-// B/ Insérer dans le DOM l'erreur quand elle est là
 
 
 
-
+//ici je crée une fonction afin de verifier et valider chaque etape du formulaire
 function validateForm() {
+  //je declare ici des variable afin de les utiliser pour valider les differentes condition
   let firstChecked;
   let lastChecked;
   let mailChecked;
@@ -89,7 +87,7 @@ function validateForm() {
   const email = document.getElementById("email");  
   const birthdate = document.getElementById ("birthdate");
   const quantity = document.getElementById("quantity");
-  const loc1 = document.getElementById("location1").checked; 
+  const loc1 = document.getElementById("location1").checked;  
   const loc2 = document.getElementById("location2").checked;
   const loc3 = document.getElementById("location3").checked; 
   const loc4 = document.getElementById("location4").checked; 
@@ -97,8 +95,8 @@ function validateForm() {
   const loc6 = document.getElementById("location6").checked;  
   const validation = document.getElementById("checkbox1");
   
-  
-  
+
+  // je crée une condition afin de verifier ici si  Le champ Prénom a un minimum de 2 caractères / n'est pas vide.
   if (first.value.length < 2) {
     errorFirst.style.display = "block";
     errorFirst.textContent = "Veuillez remplir le champt Prénom";
@@ -107,9 +105,9 @@ function validateForm() {
     errorFirst.style.display = "none";
     firstChecked = true;
   }
- ; /*on crée une variable qui frecupere l'element HTML "last" */
-  
-  if (last.value.length < 2) {  // si seulement last.value = true si quelque chose dedans !=contraire de / || = ou / longueur 
+
+  //je crée une condition afin de verifier ici si Le champ du nom de famille a un minimum de 2 caractères / n'est pas vide.
+  if (last.value.length < 2) {  
     errorLastName.style.display = "block";
     errorLastName.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
   }
@@ -117,7 +115,8 @@ function validateForm() {
     errorLastName.style.display = "none";
     lastChecked = true;
   }
- 
+  
+  //3) je crée une condition afin de verifier ici si L'adresse électronique est valide.  
   if ( !email.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g) ) { //regex pour verification format email
     errorEmail.style.display = "block";
     errorEmail.textContent = "Veuillez remplir le champ email";
@@ -126,8 +125,8 @@ function validateForm() {
     errorEmail.style.display = "none";
     mailChecked = true;
   }
-  
-  if (!birthdate.value.match(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/)) {
+  //je crée une condition afin de verifier si Pour la date de naissance une donnée est saisie.
+  if (!birthdate.value.match(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/)) { //.match est utilisé pour verifier si la chaine de caractere respecte le regex
     errorBirthdate.style.display = "block";
     errorBirthdate.textContent = "Vous devez entrer votre date de naissance.";
   }
@@ -135,8 +134,8 @@ function validateForm() {
     errorBirthdate.style.display = "none";
     birthChecked = true;
   } 
- //let quantityInt = parseInt(quantity.value, 10); //parseInt change string en int (mettre ",10" pour convertir en base 10)
- 
+
+  //je crée une condition afin de verifier si Pour le nombre de concours, une valeur numérique est saisie.
   if (!quantity.value.match(/^[0-9]+$/)) { //regex pour check if number
     errorQuantity.style.display = "block";
     errorQuantity.textContent = "Veuiller indiquer un nombre"
@@ -145,8 +144,9 @@ function validateForm() {
     errorQuantity.style.display = "none"
     quantityChecked = true;
   };
-
-  if (loc1 || loc2 || loc3 || loc4 || loc5 || loc6) {
+//je crée une condition afin de verifier si Un bouton radio est sélectionné.
+  if (loc1 || loc2 || loc3 || loc4 || loc5 || loc6) { //on reutilise ici les const declaré plus haut avec le .checked qui verifie si un bouton est coché ou pas 
+    //|| ou logique renvoie vrai si et seulement si au moins un de ses opérandes est vrai 
     errorLoc.style.display = "none";
     radioChecked = true;
   }
@@ -155,6 +155,7 @@ function validateForm() {
     errorLoc.textContent = "Vous devez choisir une option."
   }
   
+  //je crée une condition afin de verifier si La case des conditions générales est cochée, l'autre case est facultative / peut être laissée décochée.
   if (!validation.checked) {
     errorCheckbox.style.display = "block";
     errorCheckbox.textContent = "Vous devez vérifier que vous acceptez les termes et conditions."   
@@ -163,7 +164,7 @@ function validateForm() {
     errorCheckbox.style.display = "none"
     conditionsChecked = true
   }
-
+  //je crée une condition afin de verifier si toute les condition son true pour validation du formulaire
   if (firstChecked === true &&  lastChecked === true && birthChecked === true && quantityChecked === true && radioChecked === true && conditionsChecked === true) {
     confirmation.style.display = "block"
   }  
