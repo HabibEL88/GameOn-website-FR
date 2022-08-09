@@ -20,6 +20,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+
 }
 
 
@@ -38,18 +39,25 @@ const closebutton = document.querySelector(".close");
 // ajouter un événement de clique sur le bouton, qui ferme la modale
 closebutton.addEventListener("click", closeModale);
 // 3/ J'écris la fonction de fermeture de la modale
-function closeModale() {
-
-
+const formulaire = document.getElementById("reserve");
+function closeModale(el) {
+console.log(el.target);
+const formulaire = document.getElementById("formulaire")
   // Je récupère la modal 
   modalbg.style.display = "none";
-  document.getElementById("formulaire").reset(); // reset du formulaire
-  const deleteMessage = document.getElementById("confirmation") 
+  formulaire.reset(); // reset du formulaire
+  const deleteMessage = document.getElementById("confirmation"); 
   deleteMessage.style.display = "none" //je fais disparaitre 
+  formulaire.style.display = "block";
+  const buttonClose = document.querySelector(".button-close");
+  console.log(buttonClose);
+  if (buttonClose != null ){
+    buttonClose.remove(); 
+  }
+
 }
 
 
-const formulaire = document.getElementById("reserve");
 
 
 
@@ -94,55 +102,76 @@ function validateForm() {
   const loc5 = document.getElementById("location5").checked; 
   const loc6 = document.getElementById("location6").checked;  
   const validation = document.getElementById("checkbox1");
-  
+  const Formulaire = document.getElementById("formulaire");
+  const modalBody = document.getElementsByClassName("modal-body");
+  const inputButton = document.createElement("input");
+  inputButton.classList.add("button");
+  inputButton.classList.add("button-close")
+  inputButton.value = "Fermer";
+  inputButton.addEventListener("click", closeModale);
+
 
   // je crée une condition afin de verifier ici si  Le champ Prénom a un minimum de 2 caractères / n'est pas vide.
   if (first.value.length < 2) {
-    errorFirst.style.display = "block";
+        errorFirst.style.display = "block";        
     errorFirst.textContent = "Veuillez remplir le champt Prénom";
+    first.closest(".formData").setAttribute("data-error-visible", "true");
+
   } 
   else {    
     errorFirst.style.display = "none";
-    firstChecked = true;
+    firstChecked = true;    
+    first.closest(".formData").setAttribute("data-error-visible", "false");
   }
 
   //je crée une condition afin de verifier ici si Le champ du nom de famille a un minimum de 2 caractères / n'est pas vide.
   if (last.value.length < 2) {  
     errorLastName.style.display = "block";
     errorLastName.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
+    last.closest(".formData").setAttribute("data-error-visible", "true");
   }
   else {    
     errorLastName.style.display = "none";
     lastChecked = true;
+    last.closest(".formData").setAttribute("data-error-visible", "false");
   }
   
   //3) je crée une condition afin de verifier ici si L'adresse électronique est valide.  
   if ( !email.value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g) ) { //regex pour verification format email
     errorEmail.style.display = "block";
     errorEmail.textContent = "Veuillez remplir le champ email";
+    email.closest(".formData").setAttribute("data-error-visible", "true");
   }
   else {    
     errorEmail.style.display = "none";
     mailChecked = true;
+    email.closest(".formData").setAttribute("data-error-visible", "false");
   }
   //je crée une condition afin de verifier si Pour la date de naissance une donnée est saisie.
   if (!birthdate.value.match(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/)) { //.match est utilisé pour verifier si la chaine de caractere respecte le regex
     errorBirthdate.style.display = "block";
     errorBirthdate.textContent = "Vous devez entrer votre date de naissance.";
+    birthdate.closest(".formData").setAttribute("data-error-visible", "true");
   }
   else{
     errorBirthdate.style.display = "none";
     birthChecked = true;
+    birthdate.closest(".formData").setAttribute("data-error-visible", "false");
+
   } 
 
   //je crée une condition afin de verifier si Pour le nombre de concours, une valeur numérique est saisie.
   if (!quantity.value.match(/^[0-9]+$/)) { //regex pour check if number
     errorQuantity.style.display = "block";
     errorQuantity.textContent = "Veuiller indiquer un nombre"
+    quantity.closest(".formData").setAttribute("data-error-visible", "true");
+
   }
   else {
     errorQuantity.style.display = "none"
     quantityChecked = true;
+    quantity.closest(".formData").setAttribute("data-error-visible", "false");
+
   };
 //je crée une condition afin de verifier si Un bouton radio est sélectionné.
   if (loc1 || loc2 || loc3 || loc4 || loc5 || loc6) { //on reutilise ici les const declaré plus haut avec le .checked qui verifie si un bouton est coché ou pas 
@@ -166,9 +195,13 @@ function validateForm() {
   }
   //je crée une condition afin de verifier si toute les condition son true pour validation du formulaire
   if (firstChecked === true &&  lastChecked === true && birthChecked === true && quantityChecked === true && radioChecked === true && conditionsChecked === true) {
-    confirmation.style.display = "block"
+    confirmation.style.display = "block";
+    Formulaire.style.display = "none";
+    modalBody[0].appendChild(inputButton); 
+
   }  
 }
+
 
 
 

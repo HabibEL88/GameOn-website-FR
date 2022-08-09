@@ -18,7 +18,7 @@
     </div>
     <div class="main-navbar">
       
-      <a href="#" class="active"><span>Accueil</span></a>
+      
       <a href="#"><span>Détails de l'évènement</span></a>
       <a href="#"><span>À propos</span></a>
       <a href="#"><span>Contact</span></a>
@@ -53,10 +53,9 @@
       </div>
 
       <div class="bground">
-        <div class="content">
+        <div class="content ">
           <span class="close"></span>
           <div class="modal-body">
-
             <div id="confirmation">
               <h1>Merci ! Votre réservation a été reçue.</h1>
             </div>
@@ -76,18 +75,20 @@
                   id="first"
                   name="first"
                   minlength="2"
+                  onkeydown="if(event.keyCode==32) return false;"
                 />
                 <br>
                 <span id="errorFirstName" class="error-alert-message">Salut</span> <!--ajout-->
               </div>
               <div
-                class="formData">
+                class="formData" >
                 <label for="last"> Nom</label><br> <!--ajout-->
                 <input
                   class="text-control"
                   type="text"
                   id="last"
                   name="last"
+                  onkeydown="if(event.keyCode==32) return false;"
                 /><br>
                 <span id="errorLastName" class="error-alert-message"></span> <!--ajout-->
               </div>
